@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+	<head>
+		<title>{% block title %}{% endblock %}</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'assets/css/some.css' %}" />
+
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+
+									<a href="index.html" class="logo"><strong>Editorial</strong> by Eldiyar</a>
+									<ul class="icons">
+											{% if not request.user.is_authenticated %}
+											|<a href="{% url 'register' %}"><i class="fa fa-registered" aria-hidden="true"></i></a>
+											<a href="{% url 'login' %}"><i class="far fa-user-circle"></i></a>
+											{% else %}
+											<a href="{% url 'logout' %}"><i class="fas fa-user-circle"></i></a>
+											{% endif %}
+
+
+
+										| <li><a href="https://twitter.com/?lang=ru" target="_blank" class="icon brands fa-twitter"><span class="label">Twitter</span>|</a></li>
+										|<li><a href="https://www.facebook.com/" target="_blank" class="icon brands fa-facebook-f"><span class="label">Facebook</span>|</a></li>
+										|<li><a href="https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fwelcome" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span>|</a></li>
+										|<li><a href="https://www.instagram.com/" target="_blank" class="icon brands fa-instagram"><span class="label">Instagram</span>|</a></li>
+										|<li><a href="https://www.google.ru/" target="_blank" class="fab fa-google-plus-G"><span>Google</span></a>|</li>
+
+
+
+									</ul>
+								</header>
+							{% block content %} {% endblock  %}
+
+							</div>
+						 </div>
+
+                            	<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="get" action="{% url 'home' %}">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="{% url 'home' %}">Homepage</a></li>
+
+
+										<li>
+											<span class="opener">Submenu</span>
+											<ul>
+												{% for category in categories %}
+												<li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
+												{% endfor %}
+											</ul>
+										</li>
+										{% if request.user.is_superuser %}
+										<li><a href="{% url 'add-post' %}">Add Posts</a></li>
+										{% endif %}
+										<li><a href="{% url 'home' %}?filter=new">New Posts</a></li>
+										{% if request.user.is_authenticated %}
+										<li><a href="{% url 'profile' %}">My Profile</a></li>
+										{% endif %}
+
+
+									</ul>
+								</nav>
+
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>It’s been great this year having a number of English accent students rejoin SpeechSchool.TV.  In particular, their speech assessments show they have reached an excellent level of spoken English.  Their previous training put them in good stead.  Now they’re looking to polish a few areas and refresh the course, sometimes after four or five years.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">Ebolotov904@gmail.com</a></li>
+										<li class="icon solid fa-phone"><a href="#">(+996)773 78-25-10</a></li>
+										<li class="icon solid fa-home"><a href="#">Бишкек <City></City><br />
+										Street: Пр.Манас/Жоомарт Боконбаев</a></li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/browser.min.js' %}"></script>
+        <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+        <script src="{% static 'assets/js/util.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+
+
+	</body>
+</html>
+
+

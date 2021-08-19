@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content  %}
+<h1>search results</h1>
+<div class="posts">
+    {% for post in posts %}
+    <article>
+        <a href="#" class="image"><img src="{{ post.get_image }}" style="width: 350px; height: 300px" alt="" /></a>
+        <h3>{{ post }}</h3>
+        <p>{{ post.description|truncatewords:30 }}</p>
+        <ul class="actions">
+            <li><a href="{% url 'detail' post.id %}" class="button">More</a></li>
+        </ul>
+    </article>
+    {% endfor %}
+</div>
+
+
+{% endblock %}post

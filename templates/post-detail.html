@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content  %}
+<!--style="width: auto; heigth: auto"-->
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>{{ post.title }}</h1>
+									</header>
+
+									<span class="image main"><img src="{{ post.get_image }}" style="width: auto; heigth: auto" alt="" /></span>
+
+									<p>Posted: {{ post.created }}</p>
+									<p>Author: {{ post.user.username }}</p>
+
+
+									<hr class="major" />
+									{% for image in images %}
+									<img src="{{ image }}" style="width: 500px; height: 500px;" class="img-thumbnail" alt="...">
+									{% endfor %}
+
+									<h2>{{ post.description|truncatewords:10 }}</h2>
+									<p>{{ post.description }}</p>
+										{% if request.user.is_superuser %}
+										<a href="{% url 'update-post' post.id %}" ><i class="fas fa-edit"></i></a>
+										<a href="{% url 'delete-post' post.id %}" ><i class="fas fa-trash-alt"></i></a>
+										{% endif %}
+
+										<a href="{% url 'comment-add' post.id %}">Comments <i class="fa fa-comment" aria-hidden="true"></i></a>
+
+
+
+
+
+								</section>
+{% endblock %}
+

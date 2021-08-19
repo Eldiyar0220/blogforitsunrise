@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+								<section id="banner">
+									<div class="content">
+										<header>
+                                            <div>Username:<h3>{{ request.user.username }}</h3></div>
+<!--											<p>A free and fully responsive site template</p>-->
+										</header>
+                                    </div>
+                                    <div  class="content">
+										<p>{{ request.user }}</p>
+                                    </div>
+                                        <p>Registered:{{ request.user.date_joined }}</p>
+
+
+
+								</section>
+
+
+
+<h1>New posts</h1>
+<a href="{% url 'home' %}?filter=new"><h2 style="color: blue;">click to see new posts</h2></a>
+
+
+
+
+{% endblock %}
+
+
+

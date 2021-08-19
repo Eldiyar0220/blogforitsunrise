@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content  %}
+<!--style="width: auto; heigth: auto"-->
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Welcome to Modern Blog</h1>
+									</header>
+									{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<div class="alert alert-success" role="alert">
+											  {{ message }}
+											</div>
+										{% endfor %}
+									</ul>
+									{% endif %}
+
+
+
+									<h1>Это не простой Блог здесь есть фотографии, объявление и можете найти Вакансии </h1>
+										<span class="image main"><img src="{% static 'images/blog.jpg'%}" style="width: auto; heigth: auto" alt="" /></span>
+
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel sed vehicula.</p>
+									<h1>Наиболее свежие публикации</h1>
+									<hr class="major" />
+
+									<div class="posts">
+										{% for post in page_obj %}
+										<article>
+											<a href="#" class="image"><img src="{{ post.get_image }}" style="width: 350px; height: 300px" alt="" /></a>
+											<h3>{{ post }}</h3>
+											<p>{{ post.description|truncatewords:30 }}</p>
+											<h5 class="card-title">comments {{ c.counter }}</h5>
+
+
+
+
+											<ul class="actions">
+												<li><a href="{% url 'detail' post.id %}" class="button">info</a></li>
+											</ul>
+
+										</article>
+										{% endfor %}
+									</div>
+
+								</section>
+<nav aria-label="...">
+  <ul class="pagination pagination-lg">
+	  {% if page_obj.has_previous %}
+	  <li class="page-item"><a class="page-link" href="{% url 'home' %}?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+	  {% endif %}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">{{ page_obj.number }}</span>
+    </li>
+	  {% if page_obj.has_next %}
+
+    <li class="page-item"><a class="page-link" href="{% url 'home'%}?page={{ page_obj.next_page_number }} ">{{ page_obj.next_page_number }}</a></li>
+
+	  {% endif %}
+
+  </ul>
+</nav>
+{% endblock %}
+
